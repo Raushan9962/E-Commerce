@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": "2ec0",
+      "username": "shubhamkumargarg63@gmail.com",
+      "email": "roshankr58181234@gmail.com",
+      "password": "1234567890",
+      "confirmPassword": "1234567890"
+    },
+    {
+      "id": "c1f3",
+      "username": "admin@gmail.com",
+      "email": "roshankr58181234@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": "376f",
+      "username": "admin@gmail.com",
+      "email": "nk123@gmail.com",
+      "password": "12345678"
+    },
+    {
+      "id": "7333",
+      "username": "ad@1234",
+      "email": "roshan@gmail.com",
+      "password": "123456789",
+      "confirmpassword": "123456789"
+    }
+  ]
+}
