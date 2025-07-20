@@ -20,24 +20,41 @@ const LoginPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const login = async (e) => {
-    e.preventDefault();
-    console.log(formData);
-    try {
-      let response = await AxiosInstance.post("/user/login", {
-        email: formData.email,
-        password: formData.password,
-      });
-      console.log(response);
-      if (response.data.success) {
-        setLoggedInUser(true);
-        toast.success(response.data.message)
+const login = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await AxiosInstance.post("/user/login", {
+      email: formData.email,
+      password: formData.password,
+    });
+
+    const { success, message} = response.data;
+    const role=response.data.data.role 
+    if (success) {
+      setLoggedInUser(true);
+      toast.success(message);
+
+      if (role === "admin") {
+        navigate("/admin-pannel");
+      } else if (role === "user") {
         navigate("/home");
+      } else {
+        toast.error("Unknown role detected");
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      toast.error("Login failed");
     }
-  };
+  } catch (error) {
+    console.error("Login error:", error);
+    if (error.response && error.response.data && error.response.data.message) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something went wrong. Please try again.");
+    }
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center ">

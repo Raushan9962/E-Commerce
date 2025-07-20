@@ -75,17 +75,13 @@ const Navbar = () => {
     }
   };
 
-  function stringAvatar(name) {
-    let word = name.split(" ");
-    if (word.length >= 2) {
-      return {
-        children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
-      };
-    }
-    return {
-      children: `${name.split(" ")[0][0]}`,
-    };
-  }
+  const stringAvatar = (name) => {
+  if (!name) return { children: '?' };
+  const nameParts = name.split(' ');
+  const initials = nameParts[0][0] + (nameParts[1]?.[0] || '');
+  return { children: initials.toUpperCase() };
+};
+
 
   return (
     <nav className="absolute top-0 h-[70px] w-full bg-white flex items-center justify-between px-6 shadow z-50">

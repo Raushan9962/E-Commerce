@@ -14,7 +14,7 @@ const RegisterPage = () => {
 
   const handleChange = (e) => {
     let { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });git push -u origin main
+    setFormData({ ...formData, [name]: value });
 
 
   };

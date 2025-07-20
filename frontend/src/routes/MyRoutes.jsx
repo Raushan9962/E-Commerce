@@ -5,6 +5,7 @@ import LoginPage from "../components/LoginPage";
 import Home from "../components/Home";
 import Products from "../components/Products";
 import UserPrivate from "./UserPrivate";
+import AdminPanel from "../components/AdminPannel";
 
 export let myRoutes = createBrowserRouter([
   {
@@ -36,5 +37,14 @@ export let myRoutes = createBrowserRouter([
         ),
       },
     ],
+  },
+  // Admin Panel - Separate route without Layout (no navbar)
+  {
+    path: "/admin-pannel",
+    element: (
+      <UserPrivate>
+        <AdminPanel />
+      </UserPrivate>
+    ),
   },
 ]);
