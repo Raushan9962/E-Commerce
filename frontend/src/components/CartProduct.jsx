@@ -4,9 +4,7 @@ const CartProduct = ({ product, onDecrease, onIncrease, onRemove }) => {
   return (
     <div className="p-3 flex gap-3 rounded-xl shadow-md border border-gray-200 bg-white items-center">
       <img
-        src={
-          "https://www.dropicts.com/wp-content/uploads/Dropicts-Feautred-Images-Beauty-Product-02.jpg"
-        }
+        src={product.image}
         alt={product.title}
         className="border h-24 w-24 object-center object-cover rounded-lg"
       />

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Upload, X, Search, Filter, Package, DollarSign, ShoppingCart, TrendingUp } from 'lucide-react';
 import { AxiosInstance } from '../routes/axiosInstance';
+import { GlobalAuthContext } from '../authContext/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useContext } from "react";
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
@@ -28,13 +30,16 @@ const AdminPanel = () => {
     salePrice: '',
     image: ''
   });
-
+ const { loggedInUser, setLoggedInUser, authUser } =
+    useContext(GlobalAuthContext);
+  console.log(loggedInUser);
   const handleLogout = async () => {
     try {
       const res = await AxiosInstance.post("/user/logout");
       console.log(res);
       if (res.data.success) {
         toast.success(res.data.message);
+        setLoggedInUser(false);
         navigate("/login");
       }
     } catch (error) {
@@ -218,7 +223,7 @@ const AdminPanel = () => {
       if (modalMode === 'add') {
         response = await AxiosInstance.post("/admin/product/add", productData);
       } else {
-        response = await AxiosInstance.patch(`/admin/product/update/${editingProduct._id}`, productData);
+        response = await AxiosInstance.patch(`/admin/product/update/${editingProduct.id}`, productData);
       }
 
       if (response.data.success) {
@@ -235,7 +240,7 @@ const AdminPanel = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this product?')) {
+
       try {
         const response = await AxiosInstance.delete(`/admin/product/delete/${id}`);
         if (response.data.success) {
@@ -246,7 +251,7 @@ const AdminPanel = () => {
         console.error("Error deleting product:", error);
         toast.error(error.response?.data?.message || "Failed to delete product");
       }
-    }
+
   };
 
   const categories = [...new Set(products.map(p => p.category))];
@@ -408,7 +413,7 @@ const AdminPanel = () => {
                     <Edit className="h-4 w-4 text-blue-600" />
                   </button>
                   <button
-                    onClick={() => handleDelete(product._id)}
+                    onClick={() => handleDelete(product.id)}
                     className="bg-white bg-opacity-90 hover:bg-opacity-100 p-2 rounded-full shadow-lg transition-all"
                   >
                     <Trash2 className="h-4 w-4 text-red-600" />

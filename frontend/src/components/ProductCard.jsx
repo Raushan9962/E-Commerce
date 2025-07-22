@@ -18,9 +18,7 @@ const ProductCard = ({ product }) => {
     <section className="p-4">
       <div className="shadow-lg rounded-lg overflow-hidden w-64">
         <img
-          src={
-            "https://www.shutterstock.com/image-vector/no-image-available-picture-coming-600nw-2057829641.jpg"
-          }
+          src={product.image}
           alt=""
           className=" h-64 w-full object-cover object-top block mx-auto"
         />
